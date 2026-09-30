@@ -2,7 +2,8 @@
 date: 2026-09-30
 from: Template, сессия создания общего хранилища
 kind: code
-status: open
+status: accepted
+accepted: 2026-09-30
 ---
 
 # Сверить харнесс Golf, Nature и Template и собрать лучшее в Template

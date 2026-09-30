@@ -2,7 +2,8 @@
 date: 2026-09-30
 from: Template, этап harness-e (сверка харнесса закрыта этапами harness-d и harness-e)
 kind: code
-status: open
+status: accepted
+accepted: 2026-09-30
 ---
 
 # Обновить строки «Харнесс» и «Аудио» в каталоге общего кода по итогам сверки харнесса

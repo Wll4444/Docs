@@ -25,12 +25,41 @@
 | группа | файлы | что делает | состояние копий (2026-09-30) |
 | --- | --- | --- | --- |
 | **i18n** | `src/i18n/context.ts`, `LanguageProvider.tsx`, `translations.ts` | RU/EN без библиотеки | `context.ts` совпадает везде, `LanguageProvider` почти везде. **Первый кандидат в пакет.** `translations.ts` своё у каждой игры, так и должно быть |
-| **Харнесс** | `scripts/shot.mjs`, `scripts/calibration.mjs`, `src/dev/e2e.ts`, `E2EProbe.tsx`, `E2EPhysicsProbe.tsx`, `scenarios.ts` | гоняет игру без окна, снимает PNG, пишет и проверяет калибровку | **Разошёлся сильнее всего**: Golf, Nature и Template развивали его параллельно, `e2e.ts` и `shot.mjs` отличаются на сотни строк. Какие улучшения дошли куда, по числам не видно; сверка харнесса — кандидат на отдельный этап. Точно известно одно: `diff.mjs` из Nature в Template не попал |
+| **Харнесс** | `scripts/shot.mjs`, `scripts/calibration.mjs`, `scripts/diff.mjs`, `src/dev/e2e.ts`, `E2EProbe.tsx`, `E2EPhysicsProbe.tsx`, `scenarios.ts` | гоняет игру без окна, снимает PNG, пишет и проверяет калибровку | **Разошёлся сильнее всего**, но сверен 2026-09-30: что куда дошло — в подразделе «Харнесс: сверка» ниже. Сотни строк разницы в основном законные: Template переписал идеи Golf, а не скопировал код |
 | **Производительность** | `src/dev/perf.ts`, `PerfProbe.tsx`, `PerfOverlay.tsx`, `config/quality.ts`, `store/qualityStore.ts` | замер кадра, уровни качества | `PerfOverlay` почти одинаковый. `quality.ts` форкается законно (перемеряется под сцену), `perf.ts` разошёлся на ~100 строк, законно ли это, не проверено |
-| **Аудио** | `src/audio/engine.ts`, `components/AudioManager.tsx`, `store/audioStore.ts`, `config/audio.ts` | Web Audio, привязка к событиям стора | `engine.ts` в Darts совпадает с Template, в Golf и Nature переписан (+100 строк). Стоит посмотреть, что там добавили |
+| **Аудио** | `src/audio/engine.ts`, `components/AudioManager.tsx`, `store/audioStore.ts`, `config/audio.ts` | Web Audio, привязка к событиям стора | `engine.ts` в Darts совпадает со старым Template. В Golf и Nature он переписан: синтез вместо `.ogg` и журнал для харнесса. Журнал перенесён в Template (`harness-e`), синтез нет (Template T-06, «переносится приём, не спеки») |
 | **HUD** | `components/hudStyles.ts`, `HudChrome.tsx` | общий вид интерфейса | почти одинаковые, кроме Darts |
 | **Тестовые утилиты** | `src/test-utils/renderWithStore.tsx` | рендер компонента со стором | одинаковые |
 | **Игра** | `App.tsx`, `Scene.tsx`, `CameraRig.tsx`, `store/gameStore.ts`, `game/*`, `config/scene.ts`, `config/physics.ts` | своё у каждой игры | расходиться обязаны; в таблице ниже для полноты |
+
+### Харнесс: сверка 2026-09-30
+
+Источник — Template: [план сверки](../Projects/Template/01_Specs/harness_reconcile_plan.md),
+§2–§4; код внесли этапы [`harness-d`](../Projects/Template/02_Journal/stage-hd-setting-cost.md)
+и [`harness-e`](../Projects/Template/02_Journal/stage-he-sound-in-record.md).
+
+- **Перенесено в Template:** `diff.mjs` (`npm run diff`) и таймер GPU (`gpu:`, `gpuMs`) из
+  Nature. Предел снимка 16384 px по стороне — вместо `--dpr ≤ 4` Golf и Nature: здесь
+  ломается PNG, а не буфер. Журнал звука (`sounds:`, поле `sounds`, `compareSounds`) из Golf
+  и Nature.
+- **Осталось в Nature сознательно:** парный A/B цены картинки — ждёт первый прототип, который
+  перемеряет AO/блум (T-07); цена построения `time*Build` — ждёт процедурную сцену.
+- **Есть только в Template, в Golf и Nature не дошло:** защита от чужого сервера на 5173 (у
+  Golf проверки нет вовсе); одна функция вердикта `runErrors` для ручного прогона и строки
+  `--table` (у соседей строка с `MISMATCH` запишется калибровкой); запись пишется только из
+  всего манифеста и не пишется с упавшей строкой (Golf пишет запись с дыркой); `MISSING` для
+  выбранной, но не вернувшейся строки; `selectRuns` отвергает `--table=quik`; `requires`;
+  покрытие окна метрик; проверка raw-бэкенда; `drift`; окно ввода, `playlog`, `mutate.mjs`,
+  тест калибровки. Ещё два пункта найдены в `harness-e`. Прогон падает на любом звуке
+  `SILENT` и на контексте не в `running`: без `--autoplay-policy` молчит только первый звук
+  (урок [autoplay](../04_Lessons/2026-09-30-template-autoplay-first-sound-only.md)).
+  `compareSounds` у соседей режет строку по пробелу и не разбирает `SILENT`. В `diff.mjs`
+  Nature неизвестный байт фильтра читается как «без фильтра», Template его отвергает.
+  Переносить ли это в Golf и Nature — решение владельца, отдельным этапом в каждом.
+- **Дыра во всех трёх:** `--quality`/`--lang` не проверяют, что дошли (Template T-18).
+
+Снимок ниже сверку не отражает: перенос шёл приёмом, а не текстом, поэтому числа почти не
+сдвинулись (`diff.mjs` Template против Nature — +84 −125).
 
 ## Снимок расхождений
 
@@ -42,7 +71,7 @@
 | файл (путь как в Template) | Tic-tac-toe | Rubiks-cube | Darts | Golf | Nature |
 | --- | :-: | :-: | :-: | :-: | :-: |
 | `src/App.tsx` | +15 −116 | +30 −93 | +287 −50 | +16 −8 | +65 −57 |
-| `src/audio/engine.ts` | · | · | = | +102 −41 | +97 −41 |
+| `src/audio/engine.ts` | · | · | +6 −63 | +77 −73 | +72 −73 |
 | `src/audio/useGameSounds.ts` | · | · | +67 −21 | +45 −25 | · |
 | `src/components/AudioManager.tsx` | · | · | +25 −8 | = | +7 −7 |
 | `src/components/CameraRig.tsx` | · | · | +95 −49 | +297 −60 | +90 −89 |
@@ -57,12 +86,12 @@
 | `src/config/physics.ts` | · | · | +72 −80 | +285 −85 | +128 −80 |
 | `src/config/quality.ts` | · | · | +65 −48 | +34 −35 | +74 −58 |
 | `src/config/scene.ts` | · | +54 −132 | +173 −65 | +283 −103 | +274 −122 |
-| `src/dev/e2e.ts` | · | · | +479 −372 | +757 −396 | +641 −448 |
+| `src/dev/e2e.ts` | · | · | +478 −393 | +756 −417 | +637 −466 |
 | `src/dev/E2EPhysicsProbe.tsx` | · | · | +14 −77 | +127 −73 | +94 −73 |
 | `src/dev/E2EProbe.tsx` | · | · | +14 −15 | = | +29 −2 |
-| `src/dev/perf.ts` | · | · | +20 −111 | +98 −103 | +132 −102 |
+| `src/dev/perf.ts` | · | · | +20 −155 | +98 −147 | +123 −137 |
 | `src/dev/PerfOverlay.tsx` | · | · | +1 −1 | = | = |
-| `src/dev/PerfProbe.tsx` | · | · | +1 −10 | +17 −4 | +77 −5 |
+| `src/dev/PerfProbe.tsx` | · | · | +1 −83 | +18 −78 | +42 −43 |
 | `src/dev/scenarios.ts` | · | · | · | +420 −190 | +302 −183 |
 | `src/game/aiming.ts` | · | · | +18 −21 | +125 −33 | · |
 | `src/game/pointerGesture.ts` | · | · | +9 −15 | · | · |
@@ -78,7 +107,7 @@
 | `src/store/qualityStore.ts` | · | · | +16 −17 | +1 −1 | +2 −2 |
 | `src/store/throwUiStore.ts` | · | · | +19 −10 | · | · |
 | `src/test-utils/renderWithStore.tsx` | · | +2 −2 | = | = | = |
-| `scripts/calibration.mjs` | · | · | · | +432 −287 | +421 −295 |
-| `scripts/shot.mjs` | · | · | +356 −658 | +784 −501 | +773 −580 |
-
-- `scripts/diff.mjs` — есть в Nature, нет в Template
+| `scripts/calibration.mjs` | · | · | · | +424 −368 | +418 −374 |
+| `scripts/diff.mjs` | · | · | · | · | +84 −125 |
+| `scripts/shot.mjs` | · | · | +355 −756 | +778 −594 | +828 −668 |
+- скриптов вне Template нет
