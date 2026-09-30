@@ -2,7 +2,8 @@
 date: 2026-09-30
 from: Nature, этап П-3 (обратный перенос исправлений харнесса из Template)
 kind: code
-status: open
+status: accepted
+accepted: 2026-10-01
 ---
 
 # Поправить строку «Харнесс» в каталоге: три пункта из Template дошли до Nature

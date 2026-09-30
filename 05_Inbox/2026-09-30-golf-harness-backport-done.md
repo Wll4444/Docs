@@ -2,7 +2,8 @@
 date: 2026-09-30
 from: Golf, этап H3 (обратный перенос исправлений харнесса из Template)
 kind: code
-status: open
+status: accepted
+accepted: 2026-10-01
 ---
 
 # Поправить строку «Харнесс» в каталоге: шесть пунктов из Template дошли до Golf
