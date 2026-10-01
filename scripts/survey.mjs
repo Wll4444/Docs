@@ -50,7 +50,6 @@ const PRACTICES = [
   ['реестр долга `debt.md`', has('Docs', '01_Specs', 'debt.md')],
   ['журнал с оглавлением', has('Docs', '02_Journal', 'README.md')],
   ['BOARD.md', has('BOARD.md')],
-  ['`/write-stage-report`', has('.claude', 'commands', 'write-stage-report.md')],
   ['`/new-prototype`', has('.claude', 'commands', 'new-prototype.md')],
   ['скриншот-харнесс `shot.mjs`', has('scripts', 'shot.mjs')],
   ['калибровка `--table --check`', has('scripts', 'calibration.mjs')],
