@@ -12,6 +12,7 @@
 | [Golf](Golf.md) | 3D-гольф, три лунки | R3F, Rapier, Zustand | 2026-09-11 | шесть этапов игры, очередь долга пуста |
 | [Template](Template.md) | шаблон прототипов с демо-броском | R3F, Rapier, Zustand | 2026-09-18 | харнесс A–C, debt-05 |
 | [Nature](Nature.md) | песочница: рельеф, биомы, растительность | R3F, Rapier, Zustand | 2026-09-25 | этап 4 (трава) |
+| [TinyWhoopPlayground](TinyWhoopPlayground.md) | симулятор полёта FPV-вупа с настоящего пульта | R3F, Rapier, Zustand, Gamepad API | 2026-10-01 | этап 1 (2026-10-02), следующий — ввод с пульта |
 
 Cursor использовался только в двух первых проектах, дальше вся работа идёт в Claude Code.
 
@@ -29,12 +30,15 @@ Tic-tac-toe ──► Rubiks-cube ──► Darts ──► Template (демо: 
                                    │            └── обратно: реестр долга, план харнесса,
                                    │                журнал с оглавлением (из Golf)
                                    └── каркас взят из Rubiks-cube, плюс физика
+
+Template ──► TinyWhoopPlayground (копия после харнесса E, 2026-10-01)
 ```
 
 - Darts: «the framework is being transferred from the sibling `Rubiks-cube` project».
 - Template: первый коммит «Template project based on Darts».
 - Golf: демо-слайс шаблона (кольцевая мишень) удалён на этапе 1.
 - Nature: «Stage 0 — the template from Golf».
+- TinyWhoopPlayground: копия Template после `harness-e` (2026-09-30), `/new-prototype`, 2026-10-01.
 - Template, журнал: из Golf пришли реестр долга, план харнесса и журнал в нынешнем виде.
 
 ## Не описаны

@@ -53,7 +53,7 @@ node scripts/survey.mjs code
 git, поэтому на новой машине их надо создать заново (PowerShell, прав администратора не нужно):
 
 ```powershell
-foreach ($n in 'Tic-tac-toe','Rubiks-cube','Darts','Golf','Template','Nature') {
+foreach ($n in 'Tic-tac-toe','Rubiks-cube','Darts','Golf','Template','Nature','TinyWhoopPlayground') {
   New-Item -ItemType Junction -Path "C:\Projects\Games\Docs\Projects\$n" -Target "C:\Projects\Games\$n\Docs"
 }
 ```

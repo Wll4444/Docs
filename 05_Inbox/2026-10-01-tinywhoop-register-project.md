@@ -2,7 +2,7 @@
 date: 2026-10-01
 from: TinyWhoopPlayground, этап 0 (`/new-prototype`)
 kind: card
-status: open
+status: accepted 2026-10-02
 ---
 
 # Зарегистрировать TinyWhoopPlayground в общей базе: строка в таблице проектов, junction, survey

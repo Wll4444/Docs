@@ -16,7 +16,7 @@ import { fileURLToPath } from 'node:url'
 
 const GAMES = join(dirname(fileURLToPath(import.meta.url)), '..', '..')
 // Порядок — хронологический: так таблица читается как история переноса практик.
-const PROJECTS = ['Tic-tac-toe', 'Rubiks-cube', 'Darts', 'Golf', 'Template', 'Nature']
+const PROJECTS = ['Tic-tac-toe', 'Rubiks-cube', 'Darts', 'Golf', 'Template', 'Nature', 'TinyWhoopPlayground']
 const CANON = 'Template'
 
 const at = (p, ...rest) => join(GAMES, p, ...rest)
