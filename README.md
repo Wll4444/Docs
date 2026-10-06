@@ -60,3 +60,12 @@ foreach ($n in 'Tic-tac-toe','Rubiks-cube','Darts','Golf','Template','Nature','T
 
 Для нового проекта: создать такую же ссылку, написать карточку в `01_Projects/` и добавить
 имя в список `PROJECTS` в `scripts/survey.mjs`.
+
+## Codex: пилот независимого ревью
+
+Codex подключён инструкциями `AGENTS.md` в Docs, Template и TinyWhoopPlayground.
+Общие правила находятся в `C:\Projects\Games\AGENTS.md`; локальные файлы явно
+поручают их прочитать. Сейчас Codex проверяет код и проверки, Claude Code реализует
+изменения. Порядок передачи diff, формат замечаний и повторное ревью описаны в
+[протоколе Codex/Claude](00_Reference/codex-review-workflow.md).
+Работа с Blender запланирована отдельным вторым этапом.
