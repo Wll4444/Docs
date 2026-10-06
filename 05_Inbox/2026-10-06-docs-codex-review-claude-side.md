@@ -29,3 +29,18 @@ TinyWhoopPlayground о Codex молчат, а `/write-stage-report` не зна�
 
 **Чем рискуем, если не сделать.** Claude не готовит diff к ревью (рабочее дерево
 меняется под Codex), не фиксирует исход замечаний, и пилот нечем оценить.
+
+**Ход (2026-10-06, чат TinyWhoopPlayground, не закоммичено).**
+
+- П. 1 для TinyWhoopPlayground — сделано: строка «Codex reviews a commit, not the working
+  tree» в `Process` его `CLAUDE.md`, ссылка на протокол относительная. Ради потолка в 200
+  строк: убрана строка `npm run preview`; убрана фраза «A debt that lives only in a report
+  is not planned» (она дословно есть в шаге 7 `/write-stage-report`); правило «measurement
+  changes go in their own commit» дописано к «A number lives in one place»; две строки
+  переложены в одну.
+- П. 2 — сделано в `~/.claude/commands/write-stage-report.md` (вне git): необязательный пункт
+  отчёта и раздел «Ревью Codex» в шаблоне. Сверх запроса добавлены поля оценки пилота из
+  протокола (что Claude пропустил, что не подтвердилось, что ревью пропустило) и строка в
+  шаге 11: файл ревью коммитится вместе с отчётом.
+- Осталось: п. 1 для Template — из чата Template (отсюда его репозиторий только для чтения);
+  п. 3 — после пилота.
