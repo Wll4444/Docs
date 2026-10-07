@@ -23,7 +23,8 @@ USB (EdgeTX USB Joystick → Gamepad API). Acro с рейтами Betaflight, ч
 CCD это не меняет. Уроки —
 [2026-10-02-tinywhoop-rapier-force-not-impulse-per-step](../04_Lessons/2026-10-02-tinywhoop-rapier-force-not-impulse-per-step.md),
 [2026-10-02-tinywhoop-rapier-fast-body-sinks-into-wall-by-step](../04_Lessons/2026-10-02-tinywhoop-rapier-fast-body-sinks-into-wall-by-step.md).
-Следующий — этап 4, регулятор и рейты (первый полёт человека).
+Следующий — этап 4, разделённый ревью плана (2026-10-07) на три: 4a — FPV-камера, 4b — рейты и
+регулятор (принимается по удержанию скорости, а не по пику), 4c — первый полёт человека из корпуса.
 
 Этап 2 (тег `stage-02`) — Radiomaster Pocket доходит до игры четырьмя
 стиками: экран назначения осей (стик от тумблера — по доле пройденного диапазона), карта по `id`
