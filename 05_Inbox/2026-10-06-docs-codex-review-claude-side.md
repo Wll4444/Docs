@@ -44,3 +44,10 @@ TinyWhoopPlayground о Codex молчат, а `/write-stage-report` не зна�
   шаге 11: файл ревью коммитится вместе с отчётом.
 - Осталось: п. 1 для Template — из чата Template (отсюда его репозиторий только для чтения);
   п. 3 — после пилота.
+
+**Дополнение (2026-10-07, чат Docs, после круга 2 ревью stage-03 TinyWhoop).** Протокол
+изменён: P3 без спора с задокументированным решением уходит в долг без строки владельца;
+в начале файла ревью — сводка для владельца. Строка в `CLAUDE.md` TinyWhoop («act only on
+those the owner has decided») теперь оставит такие P3 без ответа. Заменить в ней на:
+«act on those the owner has decided; an undecided P3 goes to debt by default». Та же
+формулировка — в п. 1 для Template.
