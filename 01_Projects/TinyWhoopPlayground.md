@@ -4,7 +4,7 @@ path: C:\Projects\Games\TinyWhoopPlayground
 kind: прототип игры
 stack: R3F + Rapier + Zustand, Gamepad API
 started: 2026-10-01
-updated: 2026-10-08
+updated: 2026-10-13
 ---
 
 # TinyWhoopPlayground
@@ -15,13 +15,25 @@ USB (EdgeTX USB Joystick → Gamepad API). Acro с рейтами Betaflight, ч
 моторов. Раунда нет. Главный вопрос — хочется ли летать дальше после пяти минут с пультом.
 Идея — [03_Ideas](../03_Ideas/tinywhoop_flight_playground_plan.md).
 
-**Статус:** этап 5 (2026-10-08, тег `stage-05`) — цена картинки в FPV-кадре взвешена парным A/B (`npm run shot -- --ab=…`):
+**Статус:** этап 6 (2026-10-13, тег `stage-06`) — удары и черепаха. Комнаты касаются защиты-цилиндры и детали корпуса, масса
+и инерция — у прежнего ящика (полёт тот же до бита); материал — трение 0.3, отскок 0.3: «липкость ушла». CCD держит тонкую
+крышку стола (без него дрон проходил её на 10 и 20 м/с); мягкий CCD снят — съедал отскок. Удар — событие шага (½·m·v² на шаге,
+где решатель толкнул), тряска двигает картинку, а не линзу (5° от 3 м/с, τ 60 мс — выбрал владелец). Линза не уходит за стену
+(луч от центра тела). Черепаха — crash flip Betaflight 2025.12 с гашением: один переворот при любом стике, включается и на боку у
+стены. Владелец: «черепаха работает как надо», «в остальном всё здорово». Уроки —
+[2026-10-12-tinywhoop-rapier-soft-ccd-eats-restitution](../04_Lessons/2026-10-12-tinywhoop-rapier-soft-ccd-eats-restitution.md),
+[2026-10-13-tinywhoop-f32-quaternion-angle-needs-normalising](../04_Lessons/2026-10-13-tinywhoop-f32-quaternion-angle-needs-normalising.md),
+[2026-10-13-tinywhoop-hard-hit-is-not-reproducible](../04_Lessons/2026-10-13-tinywhoop-hard-hit-is-not-reproducible.md),
+[2026-10-13-tinywhoop-held-loop-draws-no-interpolated-frame](../04_Lessons/2026-10-13-tinywhoop-held-loop-draws-no-interpolated-frame.md)
+(замечание Codex R1). Следующий — этап 7 (звук моторов).
+
+Этап 5 (2026-10-08, тег `stage-05`) — цена картинки в FPV-кадре взвешена парным A/B (`npm run shot -- --ab=…`):
 блум (0.000% пикселей) и MSAA композера (29% кадра за 0.3% пикселей) вырезаны, AO и виньетка оставлены — `high` на окне
 владельца 8.8 → 5.7 мс; строка `fx:` читает композер, который рисует. Фильтр поворота линзы (`smooth ms`) и прибор отставания
 картинки от тела движка (жёсткая — 2.33 мс); владелец выбрал жёсткую линзу. Уроки —
 [2026-10-08-tinywhoop-post-effect-weighed-by-pixels-it-changes](../04_Lessons/2026-10-08-tinywhoop-post-effect-weighed-by-pixels-it-changes.md),
 [2026-10-08-tinywhoop-two-stale-values-cancel-in-steady-state](../04_Lessons/2026-10-08-tinywhoop-two-stale-values-cancel-in-steady-state.md);
-подтверждение к уроку Nature о частоте GPU. Следующий — этап 6 (удары, черепаха). Пользователь после симуляции хочет уровни.
+подтверждение к уроку Nature о частоте GPU. Пользователь после симуляции хочет уровни.
 
 Этап 4d (2026-10-08, тег `stage-04d`) — панель настройки `?debug=1` (leva) через одну дверь стора, флаги харнесса в ту же дверь,
 перекрестие; линза вынесена на 22 мм вперёд. Уроки — ловушка Rapier со сменой массы, панель и харнесс в одну дверь, отравленный
@@ -104,6 +116,10 @@ CCD это не меняет. Уроки —
 - **Парный A/B цены эффекта** (этап 5): `scripts/ab.mjs` (порядок ABBA, медиана A − B с крайними парами) и режим `--ab` драйвера
   `scripts/shot.mjs` — `gpu:` пар и доля пикселей с «A против A»; выключатели эффектов через стор (`src/game/tuning.ts`, `fx`) и
   проверка по композеру, который рисует (`src/dev/fxWatch.ts`, `src/components/effectsChain.ts`).
+- **Контакт маленького тела в Rapier** (этап 6): масса в коллайдере без столкновений, касаются безмассовые детали (`Drone.tsx`,
+  `config/drone.ts` `DRONE_CONTACT`); удар — по импульсу решателя и скорости точки до шага (`droneWorld.ts`, `contactApproach`;
+  `game/impact.ts`); тряска смещением проекции (`LensShake.tsx`); камера, не уходящая за стену (`LensGuard.tsx`); crash flip
+  Betaflight 2025.12 с гашением (`game/turtle.ts`).
 - Прибор **отставания камеры от тела движка** (этап 5): `src/dev/lagWatch.ts` — угол между камерой без крепления и телом в
   Rapier на каждой отрисовке, делённый на угловую скорость; видит интерполяцию `@react-three/rapier`.
 
