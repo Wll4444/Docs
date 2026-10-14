@@ -4,7 +4,7 @@ path: C:\Projects\Games\TinyWhoopPlayground
 kind: прототип игры
 stack: R3F + Rapier + Zustand, Gamepad API
 started: 2026-10-01
-updated: 2026-10-13
+updated: 2026-10-14
 ---
 
 # TinyWhoopPlayground
@@ -15,7 +15,18 @@ USB (EdgeTX USB Joystick → Gamepad API). Acro с рейтами Betaflight, ч
 моторов. Раунда нет. Главный вопрос — хочется ли летать дальше после пяти минут с пультом.
 Идея — [03_Ideas](../03_Ideas/tinywhoop_flight_playground_plan.md).
 
-**Статус:** этап 6 (2026-10-13, тег `stage-06`) — удары и черепаха. Комнаты касаются защиты-цилиндры и детали корпуса, масса
+**Статус:** этап 7 (2026-10-14, тег `stage-07`) — звук моторов. Осциллятор на мотор, высота — проход лопастей (3 лопасти),
+громкость — скорость в степени 3; оба числа — на слух владельца («такой звук более похож, очень субъективно»): тон висения 830 Гц
+вместо 2.13 кГц по KV·V. Харнесс слушает выход, а не просьбу: пик спектра в `hover` — частота из `ω_hover` ±1% (вышло
++0.009%), в дизарме тишина; журнал звуков датирует шагом физики (D-11 закрыт); цена голоса ниже разрешения A/B. HUD просит
+клавишу или клик — пульт не снимает блокировку звука. До этапа 7 закрыто замечание Codex R2 этапа 6: линза у стыка двух
+поверхностей. Ревью Codex этапа 7: P1 0, P2 0, P3 1 — звук не запускается клавишей после Escape, в долг D-24;
+тот же обработчик в Template — [Inbox](../05_Inbox/2026-10-14-tinywhoop-audio-unlock-once-handler.md). Уроки —
+[2026-10-14-tinywhoop-gamepad-is-not-audio-gesture](../04_Lessons/2026-10-14-tinywhoop-gamepad-is-not-audio-gesture.md),
+[2026-10-14-tinywhoop-judge-must-not-call-judged-code](../04_Lessons/2026-10-14-tinywhoop-judge-must-not-call-judged-code.md).
+Следующий — этап 8 (прогон человеком).
+
+Этап 6 (2026-10-13, тег `stage-06`) — удары и черепаха. Комнаты касаются защиты-цилиндры и детали корпуса, масса
 и инерция — у прежнего ящика (полёт тот же до бита); материал — трение 0.3, отскок 0.3: «липкость ушла». CCD держит тонкую
 крышку стола (без него дрон проходил её на 10 и 20 м/с); мягкий CCD снят — съедал отскок. Удар — событие шага (½·m·v² на шаге,
 где решатель толкнул), тряска двигает картинку, а не линзу (5° от 3 м/с, τ 60 мс — выбрал владелец). Линза не уходит за стену
@@ -25,7 +36,7 @@ USB (EdgeTX USB Joystick → Gamepad API). Acro с рейтами Betaflight, ч
 [2026-10-13-tinywhoop-f32-quaternion-angle-needs-normalising](../04_Lessons/2026-10-13-tinywhoop-f32-quaternion-angle-needs-normalising.md),
 [2026-10-13-tinywhoop-hard-hit-is-not-reproducible](../04_Lessons/2026-10-13-tinywhoop-hard-hit-is-not-reproducible.md),
 [2026-10-13-tinywhoop-held-loop-draws-no-interpolated-frame](../04_Lessons/2026-10-13-tinywhoop-held-loop-draws-no-interpolated-frame.md)
-(замечание Codex R1). Следующий — этап 7 (звук моторов).
+(замечание Codex R1).
 
 Этап 5 (2026-10-08, тег `stage-05`) — цена картинки в FPV-кадре взвешена парным A/B (`npm run shot -- --ab=…`):
 блум (0.000% пикселей) и MSAA композера (29% кадра за 0.3% пикселей) вырезаны, AO и виньетка оставлены — `high` на окне
