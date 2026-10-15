@@ -4,7 +4,7 @@ path: C:\Projects\Games\Nature
 kind: песочница / шаблон ландшафта
 stack: R3F + Rapier + Zustand
 started: 2026-09-25
-updated: 2026-10-08
+updated: 2026-10-15
 ---
 
 # Nature
@@ -33,7 +33,7 @@ D-06 закрыты); у вида с земли до этого не было т
 каждым прогоном, цена A/B по ровным парам, частота в записи, цены и время GPU впервые сверяются;
 драйвер держал «простаивающую» карту на ступенях частоты, и цена оказалась свойством ступени
 ([урок](../04_Lessons/2026-10-08-nature-gpu-time-belongs-to-a-clock-step.md)). Дальше — 5b (AO,
-блум, MSAA). Подробно в [журнале](../Projects/Nature/02_Journal/README.md).
+блум, MSAA). С 2026-10-08 Nature в пилоте Codex-ревью ([протокол](../00_Reference/codex-review-workflow.md)): первое ревью — проекта целиком на `95af829`, дальше по этапам с 5b (`AGENTS.md` проекта). Подробно в [журнале](../Projects/Nature/02_Journal/README.md).
 
 ## Где что
 
