@@ -30,3 +30,8 @@ status: new
   всякая. Escape активации не даёт, а обработчик разблокировки с `{ once: true }` (шаблон, `useGameSounds.ts`) тратится на неё —
   дальше звук запускает только клик. Снимать обработчик — только когда контекст стал `running`; проверять на настоящем
   `AudioContext` под `--autoplay-policy=document-user-activation-required`, не выставляя состояние в сторе руками.
+- 2026-10-19, TinyWhoopPlayground, этап L01b (отчёт `TinyWhoopPlayground/Docs/02_Journal/stage-l01b-main-menu.md`) — выход
+  для игры под пульт: **меню с кнопкой «Играть», которое открывает игру переходом на том же origin**. Chrome переносит активацию
+  через такой переход: `AudioContext` новой страницы рождается `running`, без клавиши на ней; та же страница, открытая
+  напрямую, — `suspended`. Измерено в headless и headed Chrome; Firefox и Safari не проверялись. Мерить — чтениями, которые
+  сами не жест (урок [2026-10-19-tinywhoop-playwright-evaluate-is-a-user-gesture](2026-10-19-tinywhoop-playwright-evaluate-is-a-user-gesture.md)).
