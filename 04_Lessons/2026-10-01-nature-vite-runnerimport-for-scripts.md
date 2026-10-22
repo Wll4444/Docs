@@ -27,3 +27,7 @@ TypeScript игры или читает её через страницу в бр
   печать.
 
 ## Подтверждения
+
+- 2026-10-21, TinyWhoopPlayground, этап L03 — ридер журнала плейтеста (`scripts/playlog.mjs`) грузит разбор и описание уровня
+  (`src/dev/trackReport.ts`) через `runnerImport` (~0.2 с) и рисует карту полёта по тому же описанию, из которого страница строит мир,
+  а не по копии ([отчёт](../Projects/TinyWhoopPlayground/02_Journal/stage-l03-first-flight.md)).
