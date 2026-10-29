@@ -3,7 +3,7 @@ date: 2026-10-23
 source: Nature, этап П-7, ревью Codex (`Nature/Docs/02_Journal/reviews/stage-p7-codex.md`, кандидат `f36a09a`)
 tags: [tooling, harness, agents, testing]
 applies: все проекты, где флаги передаются скрипту через `npm run <скрипт> -- --флаг` и команду может набрать агент или человек в Windows PowerShell
-status: new
+status: confirmed
 ---
 
 # В Windows PowerShell `npm run x -- --флаг` теряет флаги: скрипт молча запускается без них
@@ -42,3 +42,8 @@ status: new
   первой строкой. Тогда пропажа видна глазом.
 
 ## Подтверждения
+
+- 2026-10-29, TinyWhoopPlayground, этап L09 ([отчёт](../../TinyWhoopPlayground/Docs/02_Journal/stage-l09-process-doc.md),
+  находка 2): `npm run loading -- --preview` из PowerShell прошёл «6/6» с кодом 0 на dev вместо production — выдало только
+  слово `(dev)` в строке итога; `npm run lint -- --version` вывел версию npm — флаг, известный npm, забирается молча, без
+  `Unknown cli config`. Прямой `node scripts/loading.mjs --preview` — `(production)`. Ранее там же — ревью Codex L01b (`shot`).
